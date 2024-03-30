@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador Especial</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  .bg {
+    /* La imagen de fondo */
+    background-image: url('huevona.png');
+
+    /* Asegúrate de que la imagen de fondo cubra toda la página */
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  #contenido {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #contador {
+    font-size: 1em; /* Tamaño de la fuente del contador */
+    color: #333; /* Color del texto del contador */
+    padding: 10px 20px; /* Espaciado interno del contador */
+    border: 2px solid #333; /* Borde del contador */
+    border-radius: 25px; /* Bordes redondeados del contador */
+    display: inline-block; /* Ajuste automático al contenido */
+    background-color: #fff; /* Fondo del contador */
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Sombra suave para darle profundidad */
+  }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div id="contenido">
+    <div id="contador"></div>
+  </div>
+</div>
+
+<script>
+  function actualizarContador() {
+    const fechaFinal = new Date('February 1, 2025 00:00:00').getTime();
+    const ahora = new Date().getTime();
+    const diferencia = fechaFinal - ahora;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+    document.getElementById("contador").innerHTML = dias + " días, " + horas + " horas, "
+    + minutos + " minutos, " + segundos + " segundos";
+
+    if (diferencia < 0) {
+      clearInterval(x);
+      document.getElementById("contador").innerHTML = "¡El momento ha llegado!";
+    }
+  }
+
+  // Actualiza el contador cada segundo
+  const x = setInterval(actualizarContador, 1000);
+</script>
+
+</body>
+</html>
